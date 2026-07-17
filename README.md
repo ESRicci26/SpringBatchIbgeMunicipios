@@ -1,4 +1,4 @@
-# Spring Batch IBGE Municípios do Brasil
+# SpringBatchIbgeMunicipios
 
 Aplicação **Spring Batch** (Maven, **Java 11** com todo o fluxo da arquitetura padrão do Spring Batch: `Job` → `Step` → (`Tasklet` | `ItemReader`/`ItemProcessor`/`ItemWriter`), `JobRepository`, `JobLauncher`, execução em *chunks* e *listeners*.
 
@@ -54,7 +54,7 @@ Aplicação **Spring Batch** (Maven, **Java 11** com todo o fluxo da arquitetura
 | Banco | Tecnologia | Local | Finalidade |
 |---|---|---|---|
 | **Metadados do Spring Batch** | H2 (embarcado) | `E:\SpringBatch\batch-metadata.mv.db` | Tabelas internas `BATCH_JOB_INSTANCE`, `BATCH_JOB_EXECUTION`, `BATCH_STEP_EXECUTION`, etc. |
-| **Negócio** | SQLite | `<raiz do projeto>\SpringBatch.DB` | Tabela `MunicipiosBrasil`, exatamente como pedido |
+| **Negócio** | SQLite | `<raiz do projeto>\SpringBatch.DB` | Tabela `MunicipiosBrasil` |
 
 Manter os metadados do Spring Batch separados do banco de negócio é a prática recomendada: evita conflito com o schema interno do Batch e permite trocar o banco de negócio livremente (aqui, SQLite) sem afetar o `JobRepository`.
 
