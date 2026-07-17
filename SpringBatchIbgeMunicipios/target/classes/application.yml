@@ -1,0 +1,79 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: SpringBatchIbgeMunicipios
+
+  # Impede que o Spring Boot dispare Jobs automaticamente ao subir a aplicacao.
+  # O disparo do Job de ETL acontece via watcher de diretorio (ou via REST/CLI para o download).
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+
+  jackson:
+    default-property-inclusion: non-null
+
+logging:
+  level:
+    root: INFO
+    com.javaricci: DEBUG
+    org.springframework.batch: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
+
+# ---------------------------------------------------------------------------
+# Configuracoes especificas da aplicacao
+# ---------------------------------------------------------------------------
+app:
+
+  # Diretorio monitorado. No enunciado original: E:\SpringBatch
+  # Em Windows, tanto "E:\SpringBatch" quanto "E:/SpringBatch" funcionam no Java.
+  diretorio-monitorado: E:/SpringBatch
+
+  # Nome do arquivo JSON que sera baixado / monitorado / lido
+  nome-arquivo-json: municipiosbrasil.json
+
+  # API publica do IBGE usada para baixar a lista de municipios do Brasil
+  api-municipios-url: https://servicodados.ibge.gov.br/api/v1/localidades/municipios
+
+  # Nome da tabela de destino
+  nome-tabela: MunicipiosBrasil
+
+  # Nome do arquivo do banco de negocio (SQLite). E sempre gravado na RAIZ DO PROJETO,
+  # ou seja, no diretorio de trabalho (working directory) a partir do qual a aplicacao
+  # e executada (ex: se voce rodar "java -jar target/SpringBatchIbgeMunicipios.jar"
+  # de dentro da pasta raiz do projeto, o arquivo aparece ali: ./SpringBatch.DB).
+  # A URL JDBC completa e montada dinamicamente em DataSourceConfig.
+  nome-arquivo-banco: SpringBatch.DB
+
+  # Intervalo (ms) de polling do WatchService do sistema de arquivos
+  watcher:
+    intervalo-poll-ms: 2000
+    # tempo (ms) que o arquivo precisa ficar com tamanho estavel antes de considerar
+    # que a gravacao terminou (evita disparar o Job com o arquivo ainda sendo escrito)
+    estabilidade-ms: 1500
+
+  # -------------------------------------------------------------------------
+  # DataSource de METADADOS do Spring Batch (JobRepository) - H2 em arquivo.
+  # Mantido separado do banco de negocio para nao conflitar com o schema
+  # proprio do Spring Batch (BATCH_JOB_INSTANCE, BATCH_STEP_EXECUTION, etc.)
+  # -------------------------------------------------------------------------
+  datasource:
+    batch:
+      url: jdbc:h2:file:E:/SpringBatch/batch-metadata;AUTO_SERVER=TRUE
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: ""
+
+    # ---------------------------------------------------------------------
+    # DataSource de NEGOCIO - SQLite. Arquivo gravado na RAIZ DO PROJETO
+    # (working directory da aplicacao), com o nome definido em
+    # "app.nome-arquivo-banco" (ver acima). A URL completa (jdbc:sqlite:...)
+    # e montada dinamicamente em DataSourceConfig, NAO e fixada aqui.
+    # Tabela MunicipiosBrasil e criada dinamicamente pelo Job.
+    # ---------------------------------------------------------------------
+    business:
+      driver-class-name: org.sqlite.JDBC

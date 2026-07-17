@@ -1,0 +1,116 @@
+{
+  "groups": [
+    {
+      "name": "app",
+      "type": "com.javaricci.config.AppProperties",
+      "sourceType": "com.javaricci.config.AppProperties"
+    },
+    {
+      "name": "app.datasource",
+      "type": "com.javaricci.config.AppProperties$DataSourceProps",
+      "sourceType": "com.javaricci.config.AppProperties",
+      "sourceMethod": "public com.javaricci.config.AppProperties.DataSourceProps getDatasource() "
+    },
+    {
+      "name": "app.datasource.batch",
+      "type": "com.javaricci.config.AppProperties$DsConfig",
+      "sourceType": "com.javaricci.config.AppProperties$DataSourceProps",
+      "sourceMethod": "public com.javaricci.config.AppProperties.DsConfig getBatch() "
+    },
+    {
+      "name": "app.datasource.business",
+      "type": "com.javaricci.config.AppProperties$DsConfig",
+      "sourceType": "com.javaricci.config.AppProperties$DataSourceProps",
+      "sourceMethod": "public com.javaricci.config.AppProperties.DsConfig getBusiness() "
+    },
+    {
+      "name": "app.watcher",
+      "type": "com.javaricci.config.AppProperties$Watcher",
+      "sourceType": "com.javaricci.config.AppProperties",
+      "sourceMethod": "public com.javaricci.config.AppProperties.Watcher getWatcher() "
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.api-municipios-url",
+      "type": "java.lang.String",
+      "description": "URL da API publica de onde o JSON de municipios e baixado.",
+      "sourceType": "com.javaricci.config.AppProperties"
+    },
+    {
+      "name": "app.datasource.batch.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "com.javaricci.config.AppProperties$DsConfig"
+    },
+    {
+      "name": "app.datasource.batch.password",
+      "type": "java.lang.String",
+      "sourceType": "com.javaricci.config.AppProperties$DsConfig"
+    },
+    {
+      "name": "app.datasource.batch.url",
+      "type": "java.lang.String",
+      "sourceType": "com.javaricci.config.AppProperties$DsConfig"
+    },
+    {
+      "name": "app.datasource.batch.username",
+      "type": "java.lang.String",
+      "sourceType": "com.javaricci.config.AppProperties$DsConfig"
+    },
+    {
+      "name": "app.datasource.business.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "com.javaricci.config.AppProperties$DsConfig"
+    },
+    {
+      "name": "app.datasource.business.password",
+      "type": "java.lang.String",
+      "sourceType": "com.javaricci.config.AppProperties$DsConfig"
+    },
+    {
+      "name": "app.datasource.business.url",
+      "type": "java.lang.String",
+      "sourceType": "com.javaricci.config.AppProperties$DsConfig"
+    },
+    {
+      "name": "app.datasource.business.username",
+      "type": "java.lang.String",
+      "sourceType": "com.javaricci.config.AppProperties$DsConfig"
+    },
+    {
+      "name": "app.diretorio-monitorado",
+      "type": "java.lang.String",
+      "description": "Diretorio monitorado e onde o arquivo JSON e gravado. Ex: E:\/SpringBatch",
+      "sourceType": "com.javaricci.config.AppProperties"
+    },
+    {
+      "name": "app.nome-arquivo-banco",
+      "type": "java.lang.String",
+      "description": "Nome do arquivo do banco de negocio (SQLite), ex: \"SpringBatch.DB\". Sempre resolvido a partir da RAIZ DO PROJETO (diretorio de trabalho da JVM - \"user.dir\"), independente de onde o arquivo JSON monitorado esta configurado.",
+      "sourceType": "com.javaricci.config.AppProperties"
+    },
+    {
+      "name": "app.nome-arquivo-json",
+      "type": "java.lang.String",
+      "description": "Nome do arquivo JSON. Ex: municipiosbrasil.json",
+      "sourceType": "com.javaricci.config.AppProperties"
+    },
+    {
+      "name": "app.nome-tabela",
+      "type": "java.lang.String",
+      "description": "Nome da tabela de destino no banco de negocio.",
+      "sourceType": "com.javaricci.config.AppProperties"
+    },
+    {
+      "name": "app.watcher.estabilidade-ms",
+      "type": "java.lang.Long",
+      "sourceType": "com.javaricci.config.AppProperties$Watcher"
+    },
+    {
+      "name": "app.watcher.intervalo-poll-ms",
+      "type": "java.lang.Long",
+      "sourceType": "com.javaricci.config.AppProperties$Watcher"
+    }
+  ],
+  "hints": []
+}
